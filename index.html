@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USMS — Senora City</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="login-status">
+      <div class="login-dot off" id="loginDot"></div>
+      <span id="loginText">Nicht eingeloggt — nur Lesezugriff</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn-log hidden" id="logBtn">📋 Audit Log</button>
+      <button class="btn-discord" id="discordBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Mit Discord einloggen
+      </button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="site-nav">
+    <a href="index.html" class="nav-link active">👥 Personal</a>
+    <a href="stats.html" class="nav-link">📊 Statistiken</a>
+    <a href="schwarzesbrett.html" class="nav-link">📌 Schwarzes Brett</a>
+    <a href="profil.html" class="nav-link" id="profilLink">👤 Mein Profil</a>
+  </nav>
+
+  <!-- HERO HEADER -->
+  <header class="hero-header">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <img src="img/usms_logo.png" alt="USMS Logo" class="hero-logo">
+        <div class="hero-text">
+          <div class="hero-eyebrow">Senora City · Roleplay</div>
+          <h1 class="hero-title">U.S. Marshals Service</h1>
+          <div class="hero-sub">Offizielle Personaldatenbank — Dienstnummern 1 bis 120</div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card"><div class="stat-num" id="hFilled">0</div><div class="stat-label">Belegt</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat-card"><div class="stat-num" id="hFree">0</div><div class="stat-label">Frei</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat-card"><div class="stat-num">120</div><div class="stat-label">Gesamt</div></div>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </header>
+
+  <!-- MITARBEITER DES MONATS -->
+  <div class="motm-bar" id="motmBar" style="display:none">
+    <div class="motm-inner">
+      <div class="motm-left">
+        <span class="motm-star">⭐</span>
+        <div>
+          <div class="motm-label">Mitarbeiter des Monats</div>
+          <div class="motm-name" id="motmName">—</div>
+        </div>
+      </div>
+      <div class="motm-right">
+        <span class="motm-rank" id="motmRank"></span>
+        <span class="motm-dn" id="motmDN"></span>
+        <button class="motm-edit hidden" id="motmEditBtn">✏️ Ändern</button>
+      </div>
+    </div>
+  </div>
+  <div class="motm-set hidden" id="motmSetBar">
+    <button class="btn-motm-set" id="motmSetBtn">⭐ Mitarbeiter des Monats setzen</button>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <div class="search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Name oder Dienstnummer suchen...">
+      </div>
+      <select id="rankFilter">
+        <option value="">Alle Ränge</option>
+        <option>Director Of USMS</option>
+        <option>Assistant Director of USMS</option>
+        <option>Chief Of Staff</option>
+        <option>Assistant Chief of Staff</option>
+        <option>Supervisory U.S. Marshal</option>
+        <option>Captain First Class</option>
+        <option>Captain</option>
+        <option>Sergeant First Class</option>
+        <option>Sergeant</option>
+        <option>Corporal</option>
+        <option>Deputy First Class Marshal</option>
+        <option>Deputy Marshal</option>
+        <option>Rekrut Marshal</option>
+      </select>
+    </div>
+    <button class="btn-add hidden" id="addBtn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      Mitarbeiter hinzufügen
+    </button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    <table id="mainTable">
+      <thead>
+        <tr>
+          <th style="width:80px">DN</th>
+          <th>Name & Ausbildungen</th>
+          <th>Rang</th>
+          <th>Einstellungsdatum</th>
+          <th style="width:100px">Status</th>
+          <th class="hidden" id="actionsHead" style="width:130px">Aktionen</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="table-footer" id="noEditHint">🔒 Einloggen um Einträge zu bearbeiten</div>
+
+  <!-- MITARBEITER MODAL -->
+  <div class="modal-bg hidden" id="modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle">Mitarbeiter hinzufügen</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="form-row"><label>Dienstnummer (1–120)</label><input type="number" id="fDN" min="1" max="120" placeholder="z.B. 42"></div>
+      <div class="form-row"><label>Vollständiger Name</label><input type="text" id="fName" placeholder="Vorname Nachname"></div>
+      <div class="form-row"><label>Rang</label>
+        <select id="fRank">
+          <option>Director Of USMS</option><option>Assistant Director of USMS</option><option>Chief Of Staff</option>
+          <option>Assistant Chief of Staff</option><option>Supervisory U.S. Marshal</option><option>Captain First Class</option>
+          <option>Captain</option><option>Sergeant First Class</option><option>Sergeant</option><option>Corporal</option>
+          <option>Deputy First Class Marshal</option><option>Deputy Marshal</option><option>Rekrut Marshal</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Einstellungsdatum</label><input type="date" id="fDate"></div>
+      <div class="form-row"><label>Discord ID</label><input type="text" id="fDiscord" placeholder="z.B. 108840494532316774"></div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal()">Abbrechen</button>
+        <button class="btn-save" onclick="saveEntry()">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUSBILDUNGS MODAL -->
+  <div class="modal-bg hidden" id="ausbModal">
+    <div class="modal-box" style="width:520px">
+      <div class="modal-header">
+        <h3 id="ausbTitle">Ausbildungen</h3>
+        <button class="modal-close" onclick="closeAusbModal()">✕</button>
+      </div>
+      <div class="ausb-section-title">Ausbildungen & Lizenzen</div>
+      <div class="ausb-grid" id="ausbList"></div>
+      <div class="ausb-section-title" style="margin-top:18px">Weiterbildungen</div>
+      <div class="ausb-grid wb-grid" id="wbList"></div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeAusbModal()">Abbrechen</button>
+        <button class="btn-save" onclick="saveAusbildungen()">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIZEN MODAL -->
+  <div class="modal-bg hidden" id="notizModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="notizTitle">🗒️ Admin-Notizen</h3>
+        <button class="modal-close" onclick="closeNotizModal()">✕</button>
+      </div>
+      <div class="notiz-list" id="notizList"></div>
+      <div class="form-row" style="margin-top:14px">
+        <label>Neue Notiz</label>
+        <textarea id="notizInput" rows="3" placeholder="Notiz eingeben..." style="width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:10px 12px;border-radius:7px;font-size:13px;font-family:inherit;resize:vertical;outline:none"></textarea>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeNotizModal()">Schließen</button>
+        <button class="btn-save" onclick="saveNotiz()">Notiz hinzufügen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOTM MODAL -->
+  <div class="modal-bg hidden" id="motmModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>⭐ Mitarbeiter des Monats setzen</h3>
+        <button class="modal-close" onclick="closeMotmModal()">✕</button>
+      </div>
+      <div class="form-row">
+        <label>Dienstnummer</label>
+        <input type="number" id="motmDNInput" min="1" max="120" placeholder="DN eingeben...">
+      </div>
+      <div id="motmPreview" style="margin-top:10px;font-size:13px;color:var(--text2)"></div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeMotmModal()">Abbrechen</button>
+        <button class="btn-save" onclick="saveMotm()">Setzen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOG MODAL -->
+  <div class="modal-bg hidden" id="logModal">
+    <div class="modal-box" style="width:820px;max-width:98vw">
+      <div class="modal-header">
+        <h3>📋 Audit Log</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn-save" style="font-size:12px;padding:6px 14px" onclick="exportLogPDF()">PDF Export</button>
+          <button class="modal-close" onclick="closeLogModal()">✕</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto;max-height:65vh;overflow-y:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead style="background:#111520;position:sticky;top:0">
+            <tr>
+              <th style="padding:10px 16px;text-align:left;color:#4d6080;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap">Zeitstempel</th>
+              <th style="padding:10px 16px;text-align:left;color:#4d6080;font-size:11px;text-transform:uppercase;letter-spacing:0.06em">Aktion</th>
+              <th style="padding:10px 16px;text-align:left;color:#4d6080;font-size:11px;text-transform:uppercase;letter-spacing:0.06em">Admin</th>
+              <th style="padding:10px 16px;text-align:left;color:#4d6080;font-size:11px;text-transform:uppercase;letter-spacing:0.06em">Details</th>
+            </tr>
+          </thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

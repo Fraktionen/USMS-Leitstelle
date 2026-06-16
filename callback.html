@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>USMS — Discord Login</title>
+  <style>
+    body { font-family: Inter, sans-serif; background: #0a0c10; color: #e2e8f0;
+      display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+    .box { text-align: center; }
+    .spinner { width: 32px; height: 32px; border: 3px solid #1e2a3a;
+      border-top-color: #3b82f6; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    p { color: #64748b; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="spinner"></div>
+    <p>Discord Login wird verarbeitet...</p>
+  </div>
+  <script>
+    // Discord gibt den Token im URL-Hash zurück
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get("access_token");
+
+    if (token) {
+      sessionStorage.setItem("discord_token", token);
+      window.location.href = "index.html";
+    } else {
+      document.querySelector("p").textContent = "Login fehlgeschlagen. Bitte erneut versuchen.";
+      setTimeout(() => window.location.href = "index.html", 2000);
+    }
+  </script>
+</body>
+</html>

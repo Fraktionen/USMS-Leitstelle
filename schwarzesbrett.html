@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USMS — Schwarzes Brett</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top-bar">
+    <div class="login-status">
+      <div class="login-dot off" id="loginDot"></div>
+      <span id="loginText">Nicht eingeloggt</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn-discord" id="discordBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Mit Discord einloggen
+      </button>
+    </div>
+  </div>
+  <nav class="site-nav">
+    <a href="index.html" class="nav-link">👥 Personal</a>
+    <a href="stats.html" class="nav-link">📊 Statistiken</a>
+    <a href="schwarzesbrett.html" class="nav-link active">📌 Schwarzes Brett</a>
+    <a href="profil.html" class="nav-link">👤 Mein Profil</a>
+  </nav>
+  <header class="hero-header" style="padding:0">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <img src="img/usms_logo.png" alt="USMS Logo" class="hero-logo">
+        <div class="hero-text">
+          <div class="hero-eyebrow">Senora City · Roleplay</div>
+          <h1 class="hero-title">Schwarzes Brett</h1>
+          <div class="hero-sub">Offizielle Ankündigungen der USMS-Führung</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </header>
+
+  <div class="sb-wrap">
+    <div class="sb-toolbar hidden" id="sbToolbar">
+      <button class="btn-add" onclick="openSBModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Ankündigung hinzufügen
+      </button>
+    </div>
+    <div id="sbList" class="sb-list"></div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-bg hidden" id="sbModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📌 Neue Ankündigung</h3>
+        <button class="modal-close" onclick="closeSBModal()">✕</button>
+      </div>
+      <div class="form-row"><label>Titel</label><input type="text" id="sbTitle" placeholder="Titel der Ankündigung"></div>
+      <div class="form-row"><label>Inhalt</label>
+        <textarea id="sbContent" rows="5" placeholder="Ankündigung schreiben..." style="width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:10px 12px;border-radius:7px;font-size:13px;font-family:inherit;resize:vertical;outline:none"></textarea>
+      </div>
+      <div class="form-row"><label>Kategorie</label>
+        <select id="sbKat">
+          <option value="info">ℹ️ Information</option>
+          <option value="wichtig">⚠️ Wichtig</option>
+          <option value="event">🎯 Event</option>
+          <option value="änderung">📝 Änderung</option>
+        </select>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeSBModal()">Abbrechen</button>
+        <button class="btn-save" onclick="saveSB()">Veröffentlichen</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/schwarzesbrett.js"></script>
+</body>
+</html>
