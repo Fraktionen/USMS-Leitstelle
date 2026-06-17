@@ -528,3 +528,5 @@ tbody td { padding: 13px 20px; vertical-align: middle; }
   .hero-inner { flex-direction: column; }
   .hero-stats { width: 100%; justify-content: center; }
 }
+
+.rank-badge.lieutenant { background: #0c1f35; border-color: #0e7490; color: #22d3ee; }
